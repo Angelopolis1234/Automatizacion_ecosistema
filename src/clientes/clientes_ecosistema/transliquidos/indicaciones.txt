@@ -1,0 +1,5 @@
+no hay un reporte de clientes cancelados
+debemos hacer la comparativa de los que no existen entre reportes
+
+
+Si ya no lo encuentra en la siguiente búsqueda ya estará en cancelado
