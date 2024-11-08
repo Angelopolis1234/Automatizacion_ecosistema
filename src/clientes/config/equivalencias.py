@@ -12,15 +12,17 @@ class equivalencias:
         #Client leo
         self.leo = {
             'viajes': [
-                ['serviciostmp', 'No.','viaje'],
-                ['serviciostmp', 'VEHÍCULO', 'unidad'],
-                ['serviciostmp', 'OPERADOR', 'operador'],
-                ['serviciostmp', 'FECHA VIAJE', 'fecha_salida'],
-                ['serviciostmp', 'FECHA CIERRE', 'fecha_recuperacion'],
-                ['serviciostmp', 'KMS. VACIOS', 'km_vacio'],
-                ['serviciostmp', 'KMS. TOTALES', 'km_cargado'], #It must be extracted the empty km.
-                ['serviciostmp', 'TOTAL', 'liquidacion'],
-                ['serviciostmp','CLIENTE','cliente']
+                ['No.','viaje'],
+                ['VEHÍCULO', 'unidad'],
+                ['OPERADOR', 'operador'],
+                ['FECHA VIAJE', 'fecha_salida'],
+                ['FECHA CIERRE', 'fecha_recuperacion'],
+                ['KMS. VACIOS', 'km_vacio'],
+                ['KMS. TOTALES', 'km_cargado'], #It must be extracted the empty km.
+                ['TOTAL_x', 'liquidacion'],
+                ['CLIENTE','cliente'],
+                ['LITROS ASIGNADOS','ejemplo1'],
+                ['ORIGEN', 'Origen ejemplo']
             ],
             'facturas':[
                 ['serviciostmp', 'FOLIO FACTURA', 'factura'],
