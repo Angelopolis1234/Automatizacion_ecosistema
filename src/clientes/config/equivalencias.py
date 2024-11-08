@@ -21,14 +21,12 @@ class equivalencias:
                 ['KMS. TOTALES', 'km_cargado'], #It must be extracted the empty km.
                 ['TOTAL_x', 'liquidacion'],
                 ['CLIENTE','cliente'],
-                ['LITROS ASIGNADOS','ejemplo1'],
                 ['ORIGEN', 'Origen ejemplo']
             ],
             'facturas':[
-                ['serviciostmp', 'FOLIO FACTURA', 'factura'],
-                ['serviciostmp', 'TOTAL', 'total_facturado'],
-                ['serviciostmp', 'FECHA COBRO', 'fecha_cobro'],
-                ['serviciostmp', 'TBD', 'saldo'] #To be determinate the logic or the field to be extracted.
+                ['FOLIO FACTURA', 'factura'],
+                ['TOTAL_x', 'total_facturado'],
+                ['FECHA COBRO', 'fecha_cobro'],
             ]
         } 
 

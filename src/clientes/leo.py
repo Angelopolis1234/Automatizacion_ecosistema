@@ -31,6 +31,7 @@ class leo:
         '''
         to_be_return = []
         to_be_return.append(self.create_viajes_file(path))
+        to_be_return.append(self.create_facturas_file(path))
         return to_be_return
 
 
@@ -45,27 +46,32 @@ class leo:
         try:
             path = f'{path}/leo/viajes.xlsx'
             aux = self.craft_query('viajes')
-            aux_df = self.data[aux[0]]
-            aux_df.rename(columns=aux[1], inplace=True)
-            minus0 = 0
+            data = self.data[aux[0]]
+            data.rename(columns=aux[1], inplace=True)
 
-            for i in range(len(aux_df['km_cargado'])):
-                aux_df.loc[i,'km_cargado'] = aux_df.loc[i,'km_cargado'] - aux_df.loc[i,'km_vacio']
-                if aux_df.loc[i,'km_cargado'] < 0:
-                    minus0 += 1
+            for i in range(len(data['km_cargado'])):
+                data.loc[i,'km_cargado'] = data.loc[i,'km_cargado'] - data.loc[i,'km_vacio']
             
-            print('Minus 0:'+str(minus0))#Auxiliar, to be erased
-
-            aux_df.to_excel(path, index=False)
+            data = self.data.drop_duplicates()
+            data.to_excel(path, index=False)
             return ['viajes',True]
         except Exception as error:
-            raise error
             print('An error happened: ' + str(error))
             return ['viajes',False]
 
     def create_facturas_file(self, path:str='archivos_salida'):
-        pass
-
+        try:
+            path = f'{path}/leo/facturas.xlsx'
+            aux = self.craft_query('facturas')
+            data = self.data[aux[0]]
+            data.rename(columns=aux[1], inplace=True)
+            
+            data = data.drop_duplicates()
+            data.to_excel(path, index=False)
+            return ['facturas',True]
+        except Exception as error:
+            print('An error happened: ' + str(error))
+            return ['facturas',False]
     
     def craft_query(self, file:str) -> list:
         '''
