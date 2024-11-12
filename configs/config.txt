@@ -1,1 +1,1 @@
-[OUTPUT]=C:\Users\julio\Documents
+[OUTPUT]=C:/Users/julio/OneDrive/Documentos

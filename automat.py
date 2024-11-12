@@ -2,7 +2,6 @@ import pandas as pd
 from utils import misc
 from utils import dictionary as dc
 
-files=misc.get_directories("input/leo")
 
 
 def compare_array(value,array2):
@@ -56,12 +55,14 @@ def set_value(table,df,new_table):
                 aux.append(col[dic][a])
             if aux!=[] and aux not in new_table: new_table.append(aux)
     return new_table
-        
 
-for t in dc.tables:
-    table=[]
-    for f in files:
-        df=misc.read_excel(f)
-        table=set_value(t[0],df,table)
 
-    misc.create_excel(f"output/{t[0]}.xlsx",sorted(table, key=lambda tab: tab[0]),dc.database_dict[t[0]])
+def start_clasif(file,out):
+    files=misc.get_directories(file)
+    for t in dc.tables:
+        table=[]
+        for f in files:
+            df=misc.read_excel(f)
+            table=set_value(t[0],df,table)
+
+        misc.create_excel(f"{out}/{t[0]}.xlsx",table,dc.database_dict[t[0]])

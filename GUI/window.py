@@ -1,6 +1,8 @@
 import tkinter
 import customtkinter as ctk
-
+from pathlib import Path
+from tkinter import filedialog
+import automat as at
 class main_window():
     def __init__(self):
         ctk.set_appearance_mode("System")  # Modes: system (default), light, dark
@@ -30,7 +32,7 @@ class main_window():
             self.directories[count].place(relx=0.18,rely=y)
 
             self.buttons.append(ctk.CTkButton(master=tab1, text="Seleccionar", width=100, height=35,text_color="#242424",fg_color='#dfe0dc',hover=False,
-                                              command=lambda:self.button_function(count)))
+                                              command=lambda n=count:self.button_function(n)))
             self.buttons[count].place(relx=0.9, rely=yb, anchor=tkinter.CENTER)
             y+=0.1*.5
             yb+=0.12*.42
@@ -48,10 +50,10 @@ class main_window():
         self.process=ctk.CTkFrame(master=tab1, width=650, height=300,fg_color='#dfe0dc' )
         self.process.place(relx=0.05,rely=yb+0.12*.42)
 
-        self.out=ctk.CTkLabel(master=tab1, text=f'Carpeta destino: {path}',font=font)
+        self.out=ctk.CTkLabel(master=tab1, text=f'Carpeta destino: {path}',font=font, width=200)
         self.out.place(relx=0.05,rely=0.91)
 
-        self.buttons.append(ctk.CTkButton(master=tab1, text="Cambiar ruta Salida", width=100, height=35,fg_color='#8b8b94',hover=False,command=lambda:self.button_function(count)))
+        self.buttons.append(ctk.CTkButton(master=tab1, text="Cambiar ruta Salida", width=100, height=35,fg_color='#8b8b94',hover=False,command=lambda :self.change_route()))
         self.buttons[count].place(relx=0.7, rely=0.93, anchor=tkinter.CENTER)
 
         self.buttons.append(ctk.CTkButton(master=tab1, text="Iniciar", width=100, height=35,fg_color='#83a16d',hover=False,command=lambda:self.start()))
@@ -64,16 +66,41 @@ class main_window():
         app.mainloop()
 
     def button_function(self,n):
-        print(n)
-        '''from pathlib import Path
-        from tkinter import filedialog
-        print(n)
         folder = filedialog.askdirectory()
         if folder:
             self.status.configure(text=f"Carpeta {folder} seleccionada")
             self.directories[n].insert(-1, folder)
         else:
-            self.status.configure(text="No se ha seleccionado ningún archivo.")
-'''
+            self.status.configure(text="No se ha seleccionado ningúna carpeta.")
+
     def start(self):
-        print("Started process")
+        dir=[]
+        for d in self.directories:
+            aux=d.get()
+            if aux!='':
+                dir.append(aux)        
+        if aux==[]:
+            self.status.configure(text="No se ha seleccionado ningúna carpeta.")
+        else:
+            self.status.configure(text="Iniciando proceso")
+            for d in dir:
+                at.start_clasif(d,self.out._text.replace('Carpeta destino: ',''))
+
+    def change_route(self):
+        folder = filedialog.askdirectory()
+        if folder:
+            self.status.configure(text=f"Carpeta {folder} seleccionada")
+            self.out.configure(text=f'Carpeta destino: {folder}')
+            self.config_file(ident='[OUTPUT]',text=folder)
+        else:
+            self.status.configure(text="No se ha seleccionado ningúna ruta.")
+
+    def config_file(self,ident,text):
+        with open('configs/config.txt','r') as file: lines=file.readlines()
+        new=''
+        for l in lines:
+            if ident not in l:
+                new+=l
+            else:
+                new+=f'{ident}={text}\n'
+        with open('configs/config.txt','w') as file: file.write(new)

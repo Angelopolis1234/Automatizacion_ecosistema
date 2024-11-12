@@ -141,7 +141,7 @@ database_dict={
     },
     "PROPIETARIOS":{
         "id_propietario":["#Ope"],
-        "nombre":["#OpeNombre"]
+        "nombre":["#OpeNombre",'OPERADOR']
     },
     "STATUS":{
         "id_supervisor":[],

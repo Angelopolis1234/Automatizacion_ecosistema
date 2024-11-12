@@ -19,18 +19,26 @@ def read_excel(file,sheet=0):
     col=len(df.columns)
     rows=len(df.index)
     start=0
-    for i in range(0,rows):
-        main_c=0
-        names=[]
-        for j in columns:
-            if str(df.loc[i,j])!="nan" and str(df.loc[i,j])!="None" and df.loc[i,j]!=None and str(df.loc[i,j])!="":
-                main_c+=1
-                names.append(df.loc[i,j])
-        if main_c*100/col==100:
-            start=i
-            break
-    df.drop(df.index[:start+1],inplace=True)
-    df.reset_index(drop=True,inplace=True)
+    names=[]
+    main_c=0
+    for j in columns:
+        if str(j) not in ["nan","None",None,""]:
+            main_c+=1
+            names.append(j)
+    if main_c*100/col<=90:
+        for i in range(0,rows):
+            main_c=0
+            names=[]
+            for j in columns:
+                if str(df.loc[i,j])!="nan" and str(df.loc[i,j])!="None" and df.loc[i,j]!=None and str(df.loc[i,j])!="":
+                    main_c+=1
+                    names.append(df.loc[i,j])
+            if main_c*100/col>=90:
+                start=i
+                break
+        df.drop(df.index[:start+1],inplace=True)
+        df.reset_index(drop=True,inplace=True)
+
     df.columns=check_duplicated_col(names)
     return df
 
