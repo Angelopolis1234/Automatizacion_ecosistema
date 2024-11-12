@@ -2,7 +2,7 @@ import pandas as pd
 from utils import misc
 from utils import dictionary as dc
 
-files=misc.get_directories("input/aexsa")
+files=misc.get_directories("input/leo")
 
 
 def compare_array(value,array2):

@@ -15,6 +15,34 @@ tables=[
     ["HISTORIAL_EQUIPO",5]
 ]
 
+'''
+'viajes': [
+                ['No.','id_viaje'],
+                ['OPERADOR', 'operador'],
+                ['FECHA VIAJE_x', 'fecha_salida'],
+                ['FECHA CIERRE', 'fecha_recuperacion'],
+                ['KMS. RUTA', 'km_cargado'],
+                ['KMS. VACIOS', 'km_vacio'],
+                ['FOLIO LIQUIDACIÓN', 'liquidacion'],
+                ['No.', 'id_pedido'],
+                ['VEHÍCULO', 'ID_equipo'],
+            ],
+            'facturas':[
+                ['FOLIO FACTURA', 'factura'],
+                ['TOTAL_x', 'total_facturado'],
+                ['FECHA COBRO', 'fecha_cobro'],
+                ['FECHA ENVIO REVISION', 'fecha_revision'],
+                ['No.', 'id_viaje']
+            ],
+            'liquidaciones': [
+                ['FOLIO LIQUIDACIÓN', 'liquidacion'],
+                ['COMISIÓN', 'sueldo_liquidado'],
+                ['FECHA LIQUIDACIÓN','fecha_liquidacion'],
+                ['No.', 'id_viaje']
+            ],
+'''
+
+
 database_dict={
     "CLIENTES":{
         "id_cliente":["#Cte.", "Cliente","Cte."],
@@ -56,38 +84,39 @@ database_dict={
         "id_cliente":["RAZON"] 
     },
     "VIAJES":{
-        "id_viaje":["Guia"],
+        "id_viaje":["Guia",'No.'],
         "unidad":["Unidad"],
-        "operador":["#Ope"],
-        "fecha_salida":["Fecha"],
-        "fecha_recuperacion":[],
-        "km_cargado":[],
-        "km_vacio":[],
-        "liquidacion":[],
+        "operador":["#Ope",'OPERADOR'],
+        "fecha_salida":["Fecha",'FECHA VIAJE_x'],
+        "fecha_recuperacion":['FECHA CIERRE'],
+        "km_cargado":['KMS. RUTA'],
+        "km_vacio":['KMS. VACIOS'],
+        "liquidacion":['FOLIO LIQUIDACIÓN'],
         "fecha_cancelacion":[],
         "id_pedido":[],
-        "id_equipo":[]
+        "id_equipo":['VEHÍCULO']
     },
     "FACTURAS":{
-        "total_facturado":[],
-        "fecha_revision":[],
+        'factura':['FOLIO FACTURA'],
+        "total_facturado":['TOTAL_x'],
+        "fecha_revision":['FECHA ENVIO REVISION'],
         "total_cobrado":[],
-        "fecha_cobro":[],
+        "fecha_cobro":['FECHA COBRO'],
         "saldo":[],
         "fecha_cancelacion":[],
-        "id_viaje":[]
+        "id_viaje":['No.']
     },
     "LIQUIDACIONES":{
-        "liquidacion":["NUMEROL"],
+        "liquidacion":["NUMEROL","FOLIO LIQUIDACIÓN"],
         "km_liquidados":["KMS_REALES"],
         "litros_liquidados":["LITROS"],
-        "sueldo_liquidado":["SUELDO"],
-        "fecha_liquidacion":["FECHAL"],
+        "sueldo_liquidado":["SUELDO",'COMISIÓN'],
+        "fecha_liquidacion":["FECHAL",'FECHA LIQUIDACIÓN'],
         "fecha_cancelacion":[],
-        "id_viaje":[]
+        "id_viaje":['No.']
     },
     "EQUIPOS":{
-        "id_equipo":["UNIDAD"],
+        "id_equipo":["UNIDAD",'VEHÍCULO'],
         "equipo":[], 
         "tipo":[], 
         "subtipo":[], 
