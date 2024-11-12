@@ -12,22 +12,30 @@ class equivalencias:
         #Client leo
         self.leo = {
             'viajes': [
-                ['No.','viaje'],
-                ['VEHÍCULO', 'unidad'],
+                ['No.','id_viaje'],
                 ['OPERADOR', 'operador'],
-                ['FECHA VIAJE', 'fecha_salida'],
+                ['FECHA VIAJE_x', 'fecha_salida'],
                 ['FECHA CIERRE', 'fecha_recuperacion'],
+                ['KMS. RUTA', 'km_cargado'],
                 ['KMS. VACIOS', 'km_vacio'],
-                ['KMS. TOTALES', 'km_cargado'], #It must be extracted the empty km.
-                ['TOTAL_x', 'liquidacion'],
-                ['CLIENTE','cliente'],
-                ['ORIGEN', 'Origen ejemplo']
+                ['FOLIO LIQUIDACIÓN', 'liquidacion'],
+                ['No.', 'id_pedido'],
+                ['VEHÍCULO', 'ID_equipo'],
             ],
             'facturas':[
                 ['FOLIO FACTURA', 'factura'],
                 ['TOTAL_x', 'total_facturado'],
                 ['FECHA COBRO', 'fecha_cobro'],
-            ]
+                ['FECHA ENVIO REVISION', 'fecha_revision'],
+                ['No.', 'id_viaje']
+            ],
+            'liquidaciones': [
+                ['FOLIO LIQUIDACIÓN', 'liquidacion'],
+                ['COMISIÓN', 'sueldo_liquidado'],
+                ['FECHA LIQUIDACIÓN','fecha_liquidacion'],
+                ['No.', 'id_viaje']
+            ],
+            
         } 
 
         #Client ticarsa
