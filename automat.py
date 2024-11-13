@@ -1,8 +1,8 @@
 import pandas as pd
 from utils import misc
 from utils import dictionary as dc
-
-
+import customtkinter as ctk
+import tkinter
 
 def compare_array(value,array2):
     if value in array2:
@@ -57,12 +57,16 @@ def set_value(table,df,new_table):
     return new_table
 
 
-def start_clasif(file,out):
+def start_clasif(file,out,state):
     files=misc.get_directories(file)
+    ctk.CTkLabel(master=state, text=f'Iniciando clasificacion para {file}',fg_color='#3c3c3c',corner_radius=10,text_color="#bf5e72", width=700,wraplength=700,justify='left').pack()
     for t in dc.tables:
         table=[]
+        ctk.CTkLabel(master=state, text=f'Clasificando datos para la tabla {t[0]}',fg_color='#3c3c3c',corner_radius=10, width=700,text_color="#bf5e72", wraplength=700,justify='left').pack()
         for f in files:
             df=misc.read_excel(f)
             table=set_value(t[0],df,table)
 
+        ctk.CTkLabel(master=state, text=f'Creando archivo {out}/{t[0]}.xlsx',fg_color='#3c3c3c',corner_radius=10,text_color="#bf5e72", width=700, wraplength=700,justify='left').pack()
         misc.create_excel(f"{out}/{t[0]}.xlsx",table,dc.database_dict[t[0]])
+    ctk.CTkLabel(master=state, text=f'Proceso finalizado',text_color="#bf5e72",fg_color='#3c3c3c',corner_radius=10, width=700,wraplength=700,justify='left').pack()

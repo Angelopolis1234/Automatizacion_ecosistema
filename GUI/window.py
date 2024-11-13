@@ -3,6 +3,7 @@ import customtkinter as ctk
 from pathlib import Path
 from tkinter import filedialog
 import automat as at
+import threading as th
 class main_window():
     def __init__(self):
         ctk.set_appearance_mode("System")  # Modes: system (default), light, dark
@@ -47,7 +48,7 @@ class main_window():
                     break
         
         ctk.CTkLabel(master=tab1, text='RESUMEN',text_color="#bf5e72",font=font).place(relx=0.45,rely=yb)
-        self.process=ctk.CTkFrame(master=tab1, width=650, height=300,fg_color='#dfe0dc' )
+        self.process=ctk.CTkScrollableFrame(master=tab1, width=650, height=300,fg_color='#dfe0dc' )
         self.process.place(relx=0.05,rely=yb+0.12*.42)
 
         self.out=ctk.CTkLabel(master=tab1, text=f'Carpeta destino: {path}',font=font, width=200)
@@ -74,17 +75,25 @@ class main_window():
             self.status.configure(text="No se ha seleccionado ningúna carpeta.")
 
     def start(self):
+        
+        self.status.configure(text="Proceso en ejecucion") 
+        hilo=th.Thread(target=self.start_process)
+        hilo.start()
+        self.buttons[len(self.buttons)-1].configure(state='disabled')
+
+
+    def start_process(self):
         dir=[]
         for d in self.directories:
             aux=d.get()
-            if aux!='':
-                dir.append(aux)        
-        if aux==[]:
-            self.status.configure(text="No se ha seleccionado ningúna carpeta.")
+            if aux!='': dir.append(aux)        
+        if aux==[]:  self.status.configure(text="No se ha seleccionado ningúna carpeta.")
         else:
             self.status.configure(text="Iniciando proceso")
-            for d in dir:
-                at.start_clasif(d,self.out._text.replace('Carpeta destino: ',''))
+            for d in dir: at.start_clasif(d,self.out._text.replace('Carpeta destino: ',''),self.process)
+        self.buttons[len(self.buttons)-1].configure(state='normal')
+        self.status.configure(text="Ejecucion Finalizada")
+        
 
     def change_route(self):
         folder = filedialog.askdirectory()
